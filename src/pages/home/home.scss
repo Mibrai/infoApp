@@ -1,0 +1,89 @@
+page-home {
+
+}
+
+.logo {
+  position: relative;
+  height: 250px;
+  clip-path: circle(50% at 50% 50%);
+
+}
+
+.logo ion-icon{
+  font-size: 9em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius:45%;
+}
+
+ion-img{
+  min-height:100px !important;
+  width:100%;
+  display: relative;
+  box-shadow: 3px 3px 20px 10px gainsboro;
+  margin:5px;
+}
+ion-card-title{
+  display:block;
+  width:100%;
+  font-size:8px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ion-badge{
+  box-shadow:3px 3px 20px 10px gainsboro;
+  padding:15px;
+  font-size:15px;
+  position: sticky;
+}
+.title{
+  position: sticky;
+}
+ion-button{
+  width:100%;
+  display:flex;
+}
+.style_footer ion-button{
+  width:70%;
+  text-align:center;
+}
+
+.cardfooter{
+  display: flex;
+  padding:15px;
+  margin:5px;
+}
+.icone_like , .icone_share{
+  margin-left:20px;
+  text-align: center;
+}
+
+.div-content-single{
+  text-align:justify;
+  font-size:15px;
+}
+.div-single-news button{
+  float: right;
+  margin-top:-5px;
+}
+.icone_like ion-icon, .icone_share ion-icon, .icone_favorite ion-icon{
+
+
+}
+.div-description{
+  word-wrap: break-word;
+  text-align: justify;
+}
+
+.all{
+  height:auto;
+  min-height:500px;
+}
+iframe{
+  height:max-content;
+  border:none;
+  min-height:500px;
+}

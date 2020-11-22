@@ -1,0 +1,7 @@
+{
+  "name": "infoApps",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "ionic-angular"
+}

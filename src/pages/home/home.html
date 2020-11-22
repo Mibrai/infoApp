@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      World<ion-icon name="planet"></ion-icon>24
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-menu side="start" type="overlay" [content]="mycontent">
+  <ion-header>
+    <ion-toolbar color="danger">
+      <ion-title> Settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="logo">
+      <ion-icon name="settings-outline"></ion-icon>
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-label> <ion-icon name="flag-outline"></ion-icon>Countries</ion-label>
+        <ion-select multiple="false" [(ngModel)]="countrie" (ngModelChange)="onChange()">
+          <ion-option *ngFor="let country of availableContries" [value]="country">{{country.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label> <ion-icon name="filter-outline"></ion-icon>Cathegory</ion-label>
+        <ion-select multiple="false" [(ngModel)]="cathegorie" (ngModelChange)="onChangeCathegory()">
+          <ion-option value="business">Business</ion-option>
+          <ion-option value="entertainment">Entertainment</ion-option>
+          <ion-option value="health">Health</ion-option>
+          <ion-option value="science">Science</ion-option>
+          <ion-option value="sports">Sports</ion-option>
+          <ion-option value="technology">Technology</ion-option>
+          <ion-option value="general">General</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar color="danger"  class="style_footer">
+      <button ion-button color="danger" class="btn_footer"  expand="full" fill="outline" size="large">
+        <ion-icon name="help-circle-outline" slot="start" size="large"></ion-icon>
+        <span  slot="end">  &nbsp; &nbsp; Help</span>
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-menu>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+<ion-content padding>
+  <div class="title">
+    <ion-badge color="light" style="width:100%; padding:10px;" display="flex"> <ion-icon name="newspaper-outline" slot="start"></ion-icon> Informations : {{countrie.name}}<br>Category   &nbsp; &nbsp;:  {{cathegorie}}</ion-badge>
+  </div>
+  <div class="div-all-news" *ngIf="!state">
+
+    <ion-card  *ngFor="let article of allNews?.articles" (click)="onGoToNewsSinglePage(article)">
+      <ion-card-header>
+
+        <!--<ion-img  [src]='article.urlToImage' *ngIf ="article.urlToImage != null"></ion-img>-->
+        <ion-card-title>{{article.title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="img_">
+          <!-- <ion-img  [src]='article.urlToImage' *ngIf ="article.urlToImage != null"></ion-img>
+           -->
+           <img src="{{article.urlToImage}}" *ngIf ="article.urlToImage != null" alt="test">
+        </div>
+       {{article.description}}
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <div class="div-single-news" *ngIf="state">
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title >
+          <ion-icon name="language-outline"></ion-icon> &nbsp; {{countrie.name}}
+          <button ion-button (click)="backHome()" slot="icon-only" color="light"> <ion-icon name="home-outline" size="large"></ion-icon></button>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h3 style=" word-wrap: break-word; width:auto;  height:auto; display:block; font-size:13px; font-weight: 700; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{currentSelectedNews.title}}</h3>
+        <br>
+        <h4> <ion-icon name="person"></ion-icon>{{currentSelectedNews.author}} <span style="float:right;"> <ion-icon name="newspaper"></ion-icon> &nbsp;  Source : {{currentSelectedNews.source.name}}  </span></h4>
+        <ion-icon name="alarm"></ion-icon>  Published at : {{currentSelectedNews.publishedAt}}
+        <br>
+        <div class="img_" >
+           <img   src="{{currentSelectedNews.urlToImage}}" *ngIf ="currentSelectedNews.urlToImage != null" alt="test">
+        </div>
+
+        <br>
+
+        <div class="div-description">
+          {{currentSelectedNews.description}}
+        </div>
+        <br>
+        <div class="div-content-single">
+          {{currentSelectedNews.content}}
+          <button ion-button color="light" slot="icon-only" style="text-align: center;" (click)="readMore(currentSelectedNews.url)"><ion-icon name="arrow-forward-circle-outline"></ion-icon></button>
+        </div>
+
+
+        <ion-row class="cardfooter">
+          <ion-col class="icone_favorite">
+            <ion-icon name="star-half" size="large"></ion-icon>
+          </ion-col>
+
+          <ion-col class="icone_like">
+
+            <ion-icon name="heart-outline" size="large"></ion-icon>
+          </ion-col>
+
+            <ion-col class="icone_share">
+              <ion-icon name="share-social-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="alert alert-info" role="alert">
+      Original Source  &nbsp; &nbsp; <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+    <div class="all" *ngIf="showSource">
+      <iframe
+        width="100%"
+        height="100%"
+        [src]="currentNewsUrl"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="danger"  class="style_footer">
+    <ion-title style="width:auto;">Copyright World<ion-icon name="planet"></ion-icon>24 @ 2020</ion-title>
+  </ion-toolbar>
+</ion-footer>
